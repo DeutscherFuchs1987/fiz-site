@@ -4,986 +4,601 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT-ЗОЖ | Питание и вода</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0c12;
+            --bg-card: #11131c;
+            --border: #1f2230;
+            --text-primary: #eef2ff;
+            --text-secondary: #8b92b0;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-blue: #3b82f6;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', 'SF Mono', 'Fira Code', monospace;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            background: rgba(10, 12, 18, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            font-family: monospace;
+        }
+        .navbar-brand span:first-child {
+            color: var(--accent-cyan);
+        }
+        .navbar-brand span:last-child {
+            color: var(--text-primary);
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0 4px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+        .nav-link.active {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border-radius: 8px;
+        }
+
+        .hero {
+            padding: 100px 0 60px;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(6,182,212,0.15);
+            border: 1px solid rgba(6,182,212,0.3);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            font-family: monospace;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        .hero-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 90%;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 24px;
+            margin: 28px 0;
+        }
+
+        .btn-primary-ghost {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-primary-ghost:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 12px rgba(6,182,212,0.4);
+        }
+        .btn-outline-light {
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: 12px 28px;
+        }
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+        .btn-sm-ghost {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .btn-sm-ghost:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .card-bg {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .water-glass {
+            background: #0c0e15;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .water-glass:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+        .water-glass.full {
+            background: rgba(6,182,212,0.15);
+            border-color: var(--accent-cyan);
+        }
+        .water-glass .glass-icon {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .water-glass.full .glass-icon {
+            color: var(--accent-cyan);
+        }
+        .progress-bar-bg {
+            background: #1a1d2b;
+            border-radius: 100px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: var(--accent-cyan);
+            width: 0%;
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .meal-card {
+            background: #0c0e15;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .meal-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .meal-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .meal-option:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(6,182,212,0.05);
+        }
+        .meal-option.selected {
+            border-color: var(--accent-cyan);
+            background: rgba(6,182,212,0.1);
+        }
+        .nutrition-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            background: rgba(6,182,212,0.15);
+            color: var(--accent-cyan);
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            background: #080a10;
+            padding: 48px 0 24px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-text { max-width: 100%; }
+            .water-glass { padding: 8px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <i class="fas fa-code"></i>
-                    <span class="logo-text">IT-ЗОЖ</span>
-                </a>
-            </div>
-            
-            <!-- Навигационное меню -->
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a></li>
-                    <li class="nav-item"><a href="warm-up.html" class="nav-link"><i class="fas fa-running"></i> Разминка</a></li>
-                    <li class="nav-item"><a href="activity.html" class="nav-link"><i class="fas fa-bicycle"></i> Активность</a></li>
-                    <li class="nav-item"><a href="schedule.html" class="nav-link"><i class="fas fa-bed"></i> Режим и сон</a></li>
-                    <li class="nav-item"><a href="nutrition.html" class="nav-link active"><i class="fas fa-apple-alt"></i> Питание</a></li>
-                    <li class="nav-item"><a href="prevention.html" class="nav-link"><i class="fas fa-shield-alt"></i> Профилактика</a></li>
-                </ul>
-                
-                <!-- Кнопка меню для мобильных устройств -->
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span>&lt;/&gt;</span> <span>IT-ЗОЖ</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="bi bi-list" style="color: white;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto gap-2">
+                <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="warm-up.html">Разминка</a></li>
+                <li class="nav-item"><a class="nav-link" href="activity.html">Активность</a></li>
+                <li class="nav-item"><a class="nav-link" href="schedule.html">Режим и сон</a></li>
+                <li class="nav-item"><a class="nav-link active" href="nutrition.html">Питание</a></li>
+                <li class="nav-item"><a class="nav-link" href="prevention.html">Профилактика</a></li>
+            </ul>
         </div>
-    </header>
+    </div>
+</nav>
 
-    <!-- Основной контент -->
-    <main>
-        <!-- Герой-секция для страницы питания -->
-        <section class="hero hero-small hero-nutrition">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Питание и вода</h1>
-                    <p class="hero-subtitle">Правильное питание — топливо для мозга программиста. Узнайте, как избежать вредных перекусов, поддерживать энергию в течение дня и пить достаточно воды.</p>
-                    <div class="hero-buttons">
-                        <a href="#water-tracker" class="btn btn-outline">Трекер воды</a>
-                        <a href="#meal-planner" class="btn btn-primary">
-                            <i class="fas fa-utensils"></i> Планировщик питания
-                        </a>
-                    </div>
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="hero-badge">
+                    <i class="bi bi-apple me-1"></i> nutrition · топливо для мозга
                 </div>
-            </div>
-        </section>
-
-        <!-- Секция "Проблемы питания программистов" -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Типичные проблемы питания в IT</h2>
-                <p class="section-subtitle">Сидячая работа, стресс и нерегулярный график создают специфические проблемы с питанием.</p>
-                
-                <div class="problems-grid">
-                    <div class="problem-card">
-                        <div class="problem-icon problem-bad">
-                            <i class="fas fa-cookie-bite"></i>
-                        </div>
-                        <h3>Сладкие перекусы</h3>
-                        <p>Быстрые углеводы для "подзарядки мозга" приводят к скачкам сахара, усталости и лишнему весу.</p>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <div class="problem-icon problem-bad">
-                            <i class="fas fa-hamburger"></i>
-                        </div>
-                        <h3>Фастфуд и доставка</h3>
-                        <p>Нехватка времени → нездоровая еда с избытком калорий, соли и трансжиров.</p>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <div class="problem-icon problem-bad">
-                            <i class="fas fa-coffee"></i>
-                        </div>
-                        <h3>Кофе вместо воды</h3>
-                        <p>Избыток кофеина обезвоживает, вызывает нервозность и нарушает сон.</p>
-                    </div>
-                    
-                    <div class="problem-card">
-                        <div class="problem-icon problem-bad">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Нерегулярные приемы пищи</h3>
-                        <p>Пропуск завтрака, обильный ужин — сбитый метаболизм и проблемы с ЖКТ.</p>
-                    </div>
+                <h1>Питание и вода<br>для продуктивного кода</h1>
+                <div class="hero-text">
+                    Трекер воды, планировщик питания, полезные перекусы — 
+                    чтобы не заливать дедлайны энергетиками.
                 </div>
-            </div>
-        </section>
-
-        <!-- Секция с трекером воды -->
-        <section class="section section-gray" id="water-tracker">
-            <div class="container">
-                <h2 class="section-title">Трекер воды</h2>
-                <p class="section-subtitle">Программисты часто забывают пить воду, увлекаясь работой. Норма для взрослого человека — 30-35 мл на 1 кг веса (около 2-2.5 литров в день).</p>
-                
-                <div class="water-tracker-container">
-                    <div class="water-info">
-                        <h3>Почему вода так важна?</h3>
-                        <ul class="water-benefits">
-                            <li><i class="fas fa-brain"></i> <span>Улучшает концентрацию и работу мозга</span></li>
-                            <li><i class="fas fa-tint"></i> <span>Предотвращает головные боли и усталость</span></li>
-                            <li><i class="fas fa-fire"></i> <span>Ускоряет метаболизм</span></li>
-                            <li><i class="fas fa-eye"></i> <span>Увлажняет глаза (важно при работе за компьютером)</span></li>
-                            <li><i class="fas fa-heartbeat"></i> <span>Поддерживает работу всех органов</span></li>
-                        </ul>
-                        
-                        <div class="water-calculator">
-                            <h4>Рассчитайте вашу норму:</h4>
-                            <div class="calculator-input">
-                                <label for="userWeight">Ваш вес (кг):</label>
-                                <input type="number" id="userWeight" min="40" max="200" value="70" class="form-input">
-                                <button id="calculateWater" class="btn btn-outline btn-small">Рассчитать</button>
-                            </div>
-                            <div class="calculator-result">
-                                <p>Ваша дневная норма: <span id="waterNorm">2.1</span> литра</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="water-tracker">
-                        <h3>Сколько воды вы выпили сегодня?</h3>
-                        <p class="water-subtitle">1 стакан ≈ 250 мл. Цель: <span id="waterGoal">8</span> стаканов</p>
-                        
-                        <div class="glasses-container">
-                            <!-- Стаканы будут сгенерированы JavaScript -->
-                        </div>
-                        
-                        <div class="water-stats">
-                            <div class="water-stat">
-                                <div class="stat-value" id="glassesDrunk">0</div>
-                                <div class="stat-label">Стаканов выпито</div>
-                            </div>
-                            <div class="water-stat">
-                                <div class="stat-value" id="waterDrunk">0</div>
-                                <div class="stat-label">Миллилитров</div>
-                            </div>
-                            <div class="water-stat">
-                                <div class="stat-value" id="waterPercent">0%</div>
-                                <div class="stat-label">От нормы</div>
-                            </div>
-                        </div>
-                        
-                        <div class="water-progress">
-                            <div class="progress-bar-water">
-                                <div class="progress-fill-water" id="waterProgress"></div>
-                            </div>
-                            <div class="progress-labels">
-                                <span>0</span>
-                                <span id="waterGoalML">2000</span> мл
-                            </div>
-                        </div>
-                        
-                        <div class="water-controls">
-                            <button id="addGlass" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Добавить стакан
-                            </button>
-                            <button id="resetWater" class="btn btn-outline">
-                                <i class="fas fa-redo"></i> Сбросить день
-                            </button>
-                            <button id="setWaterReminder" class="btn btn-outline">
-                                <i class="fas fa-bell"></i> Напоминание
-                            </button>
-                        </div>
-                        
-                        <div class="water-tips">
-                            <h4>Советы по питьевому режиму:</h4>
-                            <ul>
-                                <li>Держите бутылку с водой на рабочем столе</li>
-                                <li>Установите приложение-напоминание</li>
-                                <li>Пейте по стакану воды после каждого перерыва в работе</li>
-                                <li>Ограничьте кофе 2-3 чашками в день</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция "Полезные перекусы" -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Здоровые альтернативы вредным перекусам</h2>
-                <p class="section-subtitle">Что можно есть вместо чипсов, шоколадок и печенья для поддержания энергии и концентрации.</p>
-                
-                <div class="snacks-comparison">
-                    <div class="snacks-column snacks-bad">
-                        <h3><i class="fas fa-times-circle"></i> Избегать</h3>
-                        <div class="snack-list">
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-cookie"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Печенье, конфеты</h4>
-                                    <p>Быстрый подъем и резкий спад энергии</p>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-bacon"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Чипсы, сухарики</h4>
-                                    <p>Избыток соли, трансжиров, калорий</p>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-wine-bottle"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Сладкая газировка</h4>
-                                    <p>Пустые калории, вред для зубов и ЖКТ</p>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-bread-slice"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Булочки, белый хлеб</h4>
-                                    <p>Простые углеводы, мало питательных веществ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="snacks-column snacks-good">
-                        <h3><i class="fas fa-check-circle"></i> Выбирать</h3>
-                        <div class="snack-list">
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-apple-alt"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Фрукты и ягоды</h4>
-                                    <p>Витамины, клетчатка, натуральный сахар</p>
-                                    <div class="snack-examples">Яблоки, бананы, ягоды</div>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-seedling"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Орехи и семена</h4>
-                                    <p>Белок, полезные жиры, надолго насыщают</p>
-                                    <div class="snack-examples">Миндаль, грецкие орехи, семена чиа</div>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-carrot"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Овощи</h4>
-                                    <p>Клетчатка, витамины, минимум калорий</p>
-                                    <div class="snack-examples">Морковь, огурцы, сельдерей</div>
-                                </div>
-                            </div>
-                            <div class="snack-item">
-                                <div class="snack-icon">
-                                    <i class="fas fa-cheese"></i>
-                                </div>
-                                <div class="snack-info">
-                                    <h4>Кисломолочные продукты</h4>
-                                    <p>Белок, кальций, пробиотики</p>
-                                    <div class="snack-examples">Йогурт, творог, кефир</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="snack-prep">
-                    <h3>Как подготовить полезные перекусы:</h3>
-                    <div class="prep-tips">
-                        <div class="prep-tip">
-                            <div class="tip-number">1</div>
-                            <p><strong>Закупайтесь на неделю вперед</strong> - купите орехи, сухофрукты, йогурты</p>
-                        </div>
-                        <div class="prep-tip">
-                            <div class="tip-number">2</div>
-                            <p><strong>Подготовьте порционно</strong> - разложите орехи по маленьким пакетикам</p>
-                        </div>
-                        <div class="prep-tip">
-                            <div class="tip-number">3</div>
-                            <p><strong>Держите на видном месте</strong> - фрукты в вазе на столе, не в холодильнике</p>
-                        </div>
-                        <div class="prep-tip">
-                            <div class="tip-number">4</div>
-                            <p><strong>Замораживайте ягоды</strong> - всегда будут под рукой для смузи или перекуса</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция с планировщиком питания -->
-        <section class="section section-gray" id="meal-planner">
-            <div class="container">
-                <h2 class="section-title">Планировщик питания на день</h2>
-                <p class="section-subtitle">Планируйте приемы пищи заранее, чтобы избежать вредных спонтанных решений.</p>
-                
-                <div class="meal-planner-container">
-                    <div class="meal-times">
-                        <div class="meal-time" data-meal="breakfast">
-                            <div class="meal-header">
-                                <div class="meal-icon">
-                                    <i class="fas fa-sun"></i>
-                                </div>
-                                <h3>Завтрак</h3>
-                                <span class="meal-time-range">7:00 - 9:00</span>
-                            </div>
-                            <div class="meal-content">
-                                <p class="meal-description">Самый важный прием пищи. Должен содержать белки и сложные углеводы для энергии на весь день.</p>
-                                <div class="meal-options">
-                                    <div class="meal-option" data-option="1">
-                                        <h4>Овсянка с фруктами</h4>
-                                        <p>Овсяные хлопья, ягоды, орехи, мед</p>
-                                    </div>
-                                    <div class="meal-option" data-option="2">
-                                        <h4>Омлет с овощами</h4>
-                                        <p>Яйца, помидоры, перец, зелень</p>
-                                    </div>
-                                    <div class="meal-option" data-option="3">
-                                        <h4>Творог с зеленью</h4>
-                                        <p>Творог, укроп, петрушка, цельнозерновой хлеб</p>
-                                    </div>
-                                </div>
-                                <div class="meal-selection">
-                                    <span>Выбрано: </span>
-                                    <span class="selected-meal" id="selectedBreakfast">Не выбрано</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-time" data-meal="lunch">
-                            <div class="meal-header">
-                                <div class="meal-icon">
-                                    <i class="fas fa-cloud-sun"></i>
-                                </div>
-                                <h3>Обед</h3>
-                                <span class="meal-time-range">13:00 - 14:00</span>
-                            </div>
-                            <div class="meal-content">
-                                <p class="meal-description">Основной прием пищи. Белок + сложные углеводы + клетчатка.</p>
-                                <div class="meal-options">
-                                    <div class="meal-option" data-option="1">
-                                        <h4>Гречка с курицей</h4>
-                                        <p>Гречневая крупа, куриная грудка, салат</p>
-                                    </div>
-                                    <div class="meal-option" data-option="2">
-                                        <h4>Овощной суп + рыба</h4>
-                                        <p>Овощной суп, запеченная рыба, рис</p>
-                                    </div>
-                                    <div class="meal-option" data-option="3">
-                                        <h4>Салат с тунцом</h4>
-                                        <p>Тунец, листья салата, яйцо, овощи</p>
-                                    </div>
-                                </div>
-                                <div class="meal-selection">
-                                    <span>Выбрано: </span>
-                                    <span class="selected-meal" id="selectedLunch">Не выбрано</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-time" data-meal="dinner">
-                            <div class="meal-header">
-                                <div class="meal-icon">
-                                    <i class="fas fa-moon"></i>
-                                </div>
-                                <h3>Ужин</h3>
-                                <span class="meal-time-range">18:00 - 20:00</span>
-                            </div>
-                            <div class="meal-content">
-                                <p class="meal-description">Легкий прием пищи за 3-4 часа до сна. Белок + овощи.</p>
-                                <div class="meal-options">
-                                    <div class="meal-option" data-option="1">
-                                        <h4>Запеченная курица</h4>
-                                        <p>Куриная грудка, брокколи, цветная капуста</p>
-                                    </div>
-                                    <div class="meal-option" data-option="2">
-                                        <h4>Творожная запеканка</h4>
-                                        <p>Творог, яйца, изюм, сметана</p>
-                                    </div>
-                                    <div class="meal-option" data-option="3">
-                                        <h4>Овощное рагу</h4>
-                                        <p>Овощи, фасоль, специи</p>
-                                    </div>
-                                </div>
-                                <div class="meal-selection">
-                                    <span>Выбрано: </span>
-                                    <span class="selected-meal" id="selectedDinner">Не выбрано</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="meal-summary">
-                        <h3>Ваш план питания на сегодня</h3>
-                        
-                        <div class="summary-list">
-                            <div class="summary-item">
-                                <span class="summary-meal">Завтрак:</span>
-                                <span class="summary-choice" id="summaryBreakfast">Не выбрано</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-meal">Обед:</span>
-                                <span class="summary-choice" id="summaryLunch">Не выбрано</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-meal">Ужин:</span>
-                                <span class="summary-choice" id="summaryDinner">Не выбрано</span>
-                            </div>
-                        </div>
-                        
-                        <div class="nutrition-facts">
-                            <h4>Примерная питательность:</h4>
-                            <div class="nutrition-grid">
-                                <div class="nutrition-item">
-                                    <div class="nutrition-value" id="caloriesTotal">0</div>
-                                    <div class="nutrition-label">ккал</div>
-                                </div>
-                                <div class="nutrition-item">
-                                    <div class="nutrition-value" id="proteinTotal">0</div>
-                                    <div class="nutrition-label">белки</div>
-                                </div>
-                                <div class="nutrition-item">
-                                    <div class="nutrition-value" id="carbsTotal">0</div>
-                                    <div class="nutrition-label">углеводы</div>
-                                </div>
-                                <div class="nutrition-item">
-                                    <div class="nutrition-value" id="fatTotal">0</div>
-                                    <div class="nutrition-label">жиры</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-shopping">
-                            <h4>Список покупок:</h4>
-                            <ul class="shopping-list" id="shoppingList">
-                                <li>Выберите блюда для генерации списка</li>
-                            </ul>
-                            <button id="savePlan" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Сохранить план
-                            </button>
-                            <button id="printPlan" class="btn btn-outline">
-                                <i class="fas fa-print"></i> Распечатать список
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="meal-tips">
-                    <h3>Общие принципы питания для программистов:</h3>
-                    <div class="tips-grid">
-                        <div class="tip-card">
-                            <i class="fas fa-regular fa-clock"></i>
-                            <h4>Регулярность</h4>
-                            <p>Ешьте каждые 3-4 часа, чтобы поддерживать уровень энергии и избегать переедания.</p>
-                        </div>
-                        <div class="tip-card">
-                            <i class="fas fa-balance-scale"></i>
-                            <h4>Баланс</h4>
-                            <p>Каждый прием пищи должен содержать белки, сложные углеводы и полезные жиры.</p>
-                        </div>
-                        <div class="tip-card">
-                            <i class="fas fa-leaf"></i>
-                            <h4>Овощи и фрукты</h4>
-                            <p>5 порций овощей и фруктов в день обеспечивают витаминами и клетчаткой.</p>
-                        </div>
-                        <div class="tip-card">
-                            <i class="fas fa-utensil-spoon"></i>
-                            <h4>Размер порций</h4>
-                            <p>Используйте правило тарелки: ½ овощи, ¼ белок, ¼ сложные углеводы.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция с призывом к действию -->
-        <section class="section cta-section">
-            <div class="container">
-                <h2 class="cta-title">Начните с одного изменения!</h2>
-                <p class="cta-text">Не пытайтесь изменить все сразу. Начните с питьевого режима или замените один вредный перекус на полезный.</p>
-                <div class="cta-buttons">
-                    <button id="startWithWater" class="btn btn-primary btn-large">
-                        <i class="fas fa-tint"></i> Начать с трекера воды
-                    </button>
-                    <a href="prevention.html" class="btn btn-outline btn-large">
-                        Далее: Профилактика
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#water-tracker" class="btn btn-primary-ghost">
+                        <i class="bi bi-droplet me-2"></i>Трекер воды
+                    </a>
+                    <a href="#meal-planner" class="btn btn-outline-light">
+                        <i class="bi bi-egg-fried"></i> Планировщик питания
                     </a>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
+</section>
 
-    <!-- Подвал сайта -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-code"></i>
-                    <span class="logo-text">IT-ЗОЖ</span>
-                </div>
-                <p class="footer-description">Учебный проект о здоровом образе жизни для программистов. Советы и рекомендации, которые помогут сохранить здоровье в условиях сидячей работы.</p>
-                
-                <div class="footer-links">
-                    <h4 class="footer-title">Быстрые ссылки</h4>
-                    <ul class="footer-list">
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="warm-up.html">Разминка</a></li>
-                        <li><a href="activity.html">Активность</a></li>
-                        <li><a href="schedule.html">Режим и сон</a></li>
-                        <li><a href="nutrition.html">Питание</a></li>
-                        <li><a href="prevention.html">Профилактика</a></li>
+<section class="py-5" id="water-tracker">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card-bg h-100">
+                    <h3 class="fw-bold mb-3"><i class="bi bi-droplet me-2" style="color: var(--accent-cyan);"></i>Почему вода важна?</h3>
+                    <ul class="text-secondary small list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Улучшает концентрацию и работу мозга</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Предотвращает головные боли и усталость</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Ускоряет метаболизм</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Увлажняет глаза (важно за ПК)</li>
                     </ul>
-                </div>
-                
-                <div class="footer-info">
-                    <h4 class="footer-title">Информация</h4>
-                    <p>© <span id="currentYear"></span> IT-ЗОЖ. Учебный проект.</p>
-                    <p>Для начинающих веб-разработчиков.</p>
-        
+                    <hr class="border-secondary">
+                    <label class="form-label small">Ваш вес (кг)</label>
+                    <div class="d-flex gap-2">
+                        <input type="number" id="weightInput" class="form-control form-control-sm bg-dark border-secondary text-white" value="70" style="max-width: 120px;">
+                        <button id="calcNormBtn" class="btn btn-sm-ghost">Рассчитать норму</button>
+                    </div>
+                    <div class="mt-3 text-secondary small">Ваша норма: <span id="waterNormDisplay" class="fw-bold" style="color: var(--accent-cyan);">2.1</span> литра</div>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>Сайт создан в образовательных целях. Консультация специалиста рекомендуется при серьезных проблемах со здоровьем.</p>
+            <div class="col-lg-7">
+                <div class="card-bg">
+                    <h3 class="fw-bold mb-2">Сколько воды выпили сегодня?</h3>
+                    <p class="text-secondary small mb-3">1 стакан = 250 мл. Цель: <span id="goalGlasses">8</span> стаканов</p>
+                    
+                    <div id="glassesContainer" class="row g-2 mb-4"></div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-4">
+                            <div class="bg-dark rounded-3 p-2 text-center">
+                                <div class="fw-bold fs-4" id="glassesCount">0</div>
+                                <div class="small text-secondary">стаканов</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="bg-dark rounded-3 p-2 text-center">
+                                <div class="fw-bold fs-4" id="mlCount">0</div>
+                                <div class="small text-secondary">миллилитров</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="bg-dark rounded-3 p-2 text-center">
+                                <div class="fw-bold fs-4" id="percentCount">0%</div>
+                                <div class="small text-secondary">от нормы</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar-bg mb-2">
+                        <div class="progress-fill" id="waterProgress"></div>
+                    </div>
+                    
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button id="addGlassBtn" class="btn btn-primary-ghost btn-sm"><i class="bi bi-plus-lg me-1"></i>Добавить стакан</button>
+                        <button id="resetWaterBtn" class="btn btn-sm-ghost"><i class="bi bi-arrow-repeat me-1"></i>Сбросить день</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Скрипты -->
-    <script>
-        // Текущий год в футере
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Мобильное меню
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.querySelector('.nav-list').classList.toggle('show');
-        });
-        
-        // Трекер воды
-        const glassesContainer = document.querySelector('.glasses-container');
-        const glassesDrunkElement = document.getElementById('glassesDrunk');
-        const waterDrunkElement = document.getElementById('waterDrunk');
-        const waterPercentElement = document.getElementById('waterPercent');
-        const waterProgressElement = document.getElementById('waterProgress');
-        const waterGoalElement = document.getElementById('waterGoal');
-        const waterGoalMLElement = document.getElementById('waterGoalML');
-        const addGlassButton = document.getElementById('addGlass');
-        const resetWaterButton = document.getElementById('resetWater');
-        const setWaterReminderButton = document.getElementById('setWaterReminder');
-        const calculateWaterButton = document.getElementById('calculateWater');
-        const userWeightInput = document.getElementById('userWeight');
-        const waterNormElement = document.getElementById('waterNorm');
-        
-        // Настройки трекера воды
-        const GLASS_ML = 250; // мл в одном стакане
-        let glassesDrunk = parseInt(localStorage.getItem('glassesDrunk')) || 0;
-        let waterGoal = parseInt(localStorage.getItem('waterGoal')) || 8;
-        let waterNorm = parseFloat(localStorage.getItem('waterNorm')) || 2.0;
-        
-        // Инициализация трекера воды
-        function initWaterTracker() {
-            // Установка нормы из сохраненных данных
-            waterGoal = Math.ceil((waterNorm * 1000) / GLASS_ML);
-            waterGoalElement.textContent = waterGoal;
-            waterGoalMLElement.textContent = waterGoal * GLASS_ML;
-            waterNormElement.textContent = waterNorm.toFixed(1);
-            
-            // Генерация стаканов
-            glassesContainer.innerHTML = '';
-            for (let i = 0; i < waterGoal; i++) {
-                const glass = document.createElement('div');
-                glass.className = 'water-glass';
-                glass.innerHTML = `
-                    <div class="glass-icon">
-                        <i class="fas fa-glass-whiskey"></i>
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card-bg" style="border-left: 3px solid #ef4444;">
+                    <h4 class="fw-bold mb-3"><i class="bi bi-x-circle-fill text-danger me-2"></i>Избегать</h4>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div><i class="bi bi-cookie me-1"></i> Печенье/конфеты</div>
+                        <div><i class="bi bi-bag me-1"></i> Чипсы/сухарики</div>
+                        <div><i class="bi bi-cup-straw me-1"></i> Газировка</div>
+                        <div><i class="bi bi-bread me-1"></i> Белый хлеб/булочки</div>
                     </div>
-                    <div class="glass-number">${i + 1}</div>
-                `;
-                
-                if (i < glassesDrunk) {
-                    glass.classList.add('full');
-                }
-                
-                glass.addEventListener('click', function() {
-                    toggleGlass(i);
-                });
-                
-                glassesContainer.appendChild(glass);
-            }
-            
-            updateWaterStats();
-        }
-        
-        // Обновление статистики воды
-        function updateWaterStats() {
-            const waterDrunkML = glassesDrunk * GLASS_ML;
-            const waterDrunkLiters = waterDrunkML / 1000;
-            const percentage = Math.round((waterDrunkML / (waterGoal * GLASS_ML)) * 100);
-            
-            glassesDrunkElement.textContent = glassesDrunk;
-            waterDrunkElement.textContent = waterDrunkML;
-            waterPercentElement.textContent = `${percentage}%`;
-            waterProgressElement.style.width = `${percentage}%`;
-            
-            // Сохранение в localStorage
-            localStorage.setItem('glassesDrunk', glassesDrunk);
-            localStorage.setItem('waterGoal', waterGoal);
-            localStorage.setItem('waterNorm', waterNorm);
-            
-            // Уведомление при достижении цели
-            if (glassesDrunk >= waterGoal) {
-                showNotification('🎉 Поздравляем! Вы достигли дневной нормы воды!');
-            }
-        }
-        
-        // Добавление стакана
-        function addGlass() {
-            if (glassesDrunk < waterGoal) {
-                glassesDrunk++;
-                updateWaterTracker();
-                showNotification('💧 Стакан воды добавлен! Так держать!');
-            } else {
-                showNotification('Вы уже достигли дневной нормы воды!');
-            }
-        }
-        
-        // Переключение состояния стакана
-        function toggleGlass(index) {
-            if (index === glassesDrunk - 1) {
-                // Клик на последнем полном стакане - убираем его
-                glassesDrunk--;
-            } else if (index === glassesDrunk) {
-                // Клик на следующем пустом стакане - добавляем
-                glassesDrunk++;
-            } else if (index < glassesDrunk) {
-                // Клик на заполненном стакане не последнем - устанавливаем это количество
-                glassesDrunk = index + 1;
-            }
-            
-            updateWaterTracker();
-        }
-        
-        // Обновление отображения стаканов
-        function updateWaterTracker() {
-            const glasses = document.querySelectorAll('.water-glass');
-            glasses.forEach((glass, index) => {
-                if (index < glassesDrunk) {
-                    glass.classList.add('full');
-                } else {
-                    glass.classList.remove('full');
-                }
-            });
-            
-            updateWaterStats();
-        }
-        
-        // Сброс трекера воды
-        function resetWaterTracker() {
-            if (confirm('Сбросить трекер воды на сегодня?')) {
-                glassesDrunk = 0;
-                updateWaterTracker();
-                showNotification('Трекер воды сброшен. Начинаем заново!');
-            }
-        }
-        
-        // Установка напоминания о воде
-        function setWaterReminder() {
-            if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification('IT-ЗОЖ напоминает', {
-                    body: 'Пора выпить стакан воды! Ваше тело скажет вам спасибо.',
-                    icon: 'https://cdn-icons-png.flaticon.com/512/3067/3067256.png'
-                });
-            } else if ('Notification' in window && Notification.permission !== 'denied') {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        setWaterReminder();
-                    }
-                });
-            } else {
-                showNotification('Напоминание установлено. Пейте воду каждые 1-2 часа!');
-            }
-        }
-        
-        // Расчет нормы воды
-        function calculateWaterNorm() {
-            const weight = parseFloat(userWeightInput.value);
-            if (weight && weight >= 40 && weight <= 200) {
-                waterNorm = (weight * 30) / 1000; // 30 мл на 1 кг веса
-                waterNormElement.textContent = waterNorm.toFixed(1);
-                waterGoal = Math.ceil((waterNorm * 1000) / GLASS_ML);
-                waterGoalElement.textContent = waterGoal;
-                waterGoalMLElement.textContent = waterGoal * GLASS_ML;
-                
-                // Переинициализация трекера с новой целью
-                initWaterTracker();
-                showNotification(`Новая норма воды установлена: ${waterNorm.toFixed(1)} л (${waterGoal} стаканов)`);
-            } else {
-                alert('Пожалуйста, введите вес от 40 до 200 кг');
-            }
-        }
-        
-        // Планировщик питания
-        const mealOptions = {
-            breakfast: {
-                1: { name: "Овсянка с фруктами", calories: 350, protein: 12, carbs: 60, fat: 8, ingredients: ["Овсяные хлопья", "Ягоды (замороженные)", "Орехи", "Мед"] },
-                2: { name: "Омлет с овощами", calories: 320, protein: 22, carbs: 15, fat: 20, ingredients: ["Яйца", "Помидоры", "Перец", "Зелень"] },
-                3: { name: "Творог с зеленью", calories: 280, protein: 25, carbs: 20, fat: 12, ingredients: ["Творог", "Укроп", "Петрушка", "Цельнозерновой хлеб"] }
-            },
-            lunch: {
-                1: { name: "Гречка с курицей", calories: 450, protein: 35, carbs: 55, fat: 12, ingredients: ["Гречневая крупа", "Куриная грудка", "Салат листовой", "Огурцы"] },
-                2: { name: "Овощной суп + рыба", calories: 480, protein: 30, carbs: 40, fat: 18, ingredients: ["Овощи для супа", "Рыба", "Рис", "Зелень"] },
-                3: { name: "Салат с тунцом", calories: 380, protein: 28, carbs: 20, fat: 22, ingredients: ["Тунец консервированный", "Листья салата", "Яйца", "Огурцы", "Помидоры"] }
-            },
-            dinner: {
-                1: { name: "Запеченная курица", calories: 320, protein: 35, carbs: 15, fat: 14, ingredients: ["Куриная грудка", "Брокколи", "Цветная капуста", "Специи"] },
-                2: { name: "Творожная запеканка", calories: 280, protein: 22, carbs: 25, fat: 10, ingredients: ["Творог", "Яйца", "Изюм", "Сметана"] },
-                3: { name: "Овощное рагу", calories: 250, protein: 12, carbs: 35, fat: 8, ingredients: ["Овощи", "Фасоль консервированная", "Специи"] }
-            }
-        };
-        
-        let selectedMeals = JSON.parse(localStorage.getItem('selectedMeals')) || {
-            breakfast: null,
-            lunch: null,
-            dinner: null
-        };
-        
-        // Инициализация планировщика питания
-        function initMealPlanner() {
-            // Восстановление выбранных блюд
-            if (selectedMeals.breakfast) {
-                selectMeal('breakfast', selectedMeals.breakfast);
-            }
-            if (selectedMeals.lunch) {
-                selectMeal('lunch', selectedMeals.lunch);
-            }
-            if (selectedMeals.dinner) {
-                selectMeal('dinner', selectedMeals.dinner);
-            }
-            
-            updateMealSummary();
-            
-            // Обработчики для кнопок выбора блюд
-            document.querySelectorAll('.meal-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const mealType = this.closest('.meal-time').getAttribute('data-meal');
-                    const optionNumber = this.getAttribute('data-option');
-                    selectMeal(mealType, optionNumber);
-                });
-            });
-        }
-        
-        // Выбор блюда
-        function selectMeal(mealType, optionNumber) {
-            selectedMeals[mealType] = optionNumber;
-            
-            // Обновление отображения
-            const selectedMealElement = document.getElementById(`selected${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`);
-            const mealData = mealOptions[mealType][optionNumber];
-            
-            if (selectedMealElement && mealData) {
-                selectedMealElement.textContent = mealData.name;
-                
-                // Подсветка выбранного варианта
-                const mealTime = document.querySelector(`[data-meal="${mealType}"]`);
-                mealTime.querySelectorAll('.meal-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                mealTime.querySelector(`[data-option="${optionNumber}"]`).classList.add('selected');
-            }
-            
-            // Сохранение и обновление
-            localStorage.setItem('selectedMeals', JSON.stringify(selectedMeals));
-            updateMealSummary();
-        }
-        
-        // Обновление сводки питания
-        function updateMealSummary() {
-            let totalCalories = 0;
-            let totalProtein = 0;
-            let totalCarbs = 0;
-            let totalFat = 0;
-            let allIngredients = new Set();
-            
-            // Обновление выбранных блюд и расчет нутриентов
-            for (const [mealType, optionNumber] of Object.entries(selectedMeals)) {
-                if (optionNumber) {
-                    const mealData = mealOptions[mealType][optionNumber];
-                    const summaryElement = document.getElementById(`summary${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`);
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-bg" style="border-left: 3px solid var(--accent-green);">
+                    <h4 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Выбирать</h4>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div><i class="bi bi-apple me-1"></i> Фрукты/ягоды</div>
+                        <div><i class="bi bi-nut me-1"></i> Орехи/семена</div>
+                        <div><i class="bi bi-carrot me-1"></i> Овощи</div>
+                        <div><i class="bi bi-cup me-1"></i> Йогурт/творог</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="meal-planner">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="card-bg">
+                    <h3 class="fw-bold mb-3"><i class="bi bi-calendar-week me-2" style="color: var(--accent-purple);"></i>Планировщик питания на день</h3>
                     
-                    if (summaryElement && mealData) {
-                        summaryElement.textContent = mealData.name;
-                        
-                        // Добавление нутриентов
-                        totalCalories += mealData.calories;
-                        totalProtein += mealData.protein;
-                        totalCarbs += mealData.carbs;
-                        totalFat += mealData.fat;
-                        
-                        // Добавление ингредиентов
-                        mealData.ingredients.forEach(ingredient => {
-                            allIngredients.add(ingredient);
-                        });
-                    }
-                } else {
-                    const summaryElement = document.getElementById(`summary${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`);
-                    if (summaryElement) {
-                        summaryElement.textContent = 'Не выбрано';
-                    }
-                }
-            }
-            
-            // Обновление значений нутриентов
-            document.getElementById('caloriesTotal').textContent = totalCalories;
-            document.getElementById('proteinTotal').textContent = `${totalProtein}g`;
-            document.getElementById('carbsTotal').textContent = `${totalCarbs}g`;
-            document.getElementById('fatTotal').textContent = `${totalFat}g`;
-            
-            // Обновление списка покупок
-            updateShoppingList(Array.from(allIngredients));
-        }
-        
-        // Обновление списка покупок
-        function updateShoppingList(ingredients) {
-            const shoppingList = document.getElementById('shoppingList');
-            shoppingList.innerHTML = '';
-            
-            if (ingredients.length > 0) {
-                ingredients.sort().forEach(ingredient => {
-                    const li = document.createElement('li');
-                    li.textContent = ingredient;
-                    shoppingList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = 'Выберите блюда для генерации списка';
-                shoppingList.appendChild(li);
-            }
-        }
-        
-        // Сохранение плана питания
-        document.getElementById('savePlan').addEventListener('click', function() {
-            localStorage.setItem('selectedMeals', JSON.stringify(selectedMeals));
-            showNotification('План питания сохранен! Вы можете вернуться к нему позже.');
-        });
-        
-        // Печать списка покупок
-        document.getElementById('printPlan').addEventListener('click', function() {
-            const printContent = document.querySelector('.meal-summary').innerHTML;
-            const originalContent = document.body.innerHTML;
-            
-            document.body.innerHTML = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Список покупок - IT-ЗОЖ</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; padding: 20px; }
-                        h2 { color: #2c3e50; }
-                        ul { line-height: 1.8; }
-                        .print-footer { margin-top: 30px; font-size: 0.8em; color: #777; }
-                    </style>
-                </head>
-                <body>
-                    <h2>Список покупок - IT-ЗОЖ</h2>
-                    <h3>Ваш план питания:</h3>
-                    ${document.querySelector('.summary-list').outerHTML}
-                    <h3>Ингредиенты для покупки:</h3>
-                    ${document.getElementById('shoppingList').outerHTML}
-                    <div class="print-footer">
-                        <p>Сгенерировано на сайте IT-ЗОЖ: Питание и вода</p>
-                        <p>Дата: ${new Date().toLocaleDateString()}</p>
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <i class="bi bi-sun fs-5 me-2" style="color: var(--accent-orange);"></i>
+                            <strong>Завтрак</strong> <span class="text-secondary small ms-2">7:00-9:00</span>
+                        </div>
+                        <div id="breakfastOptions"></div>
+                        <div class="mt-2 small text-secondary">Выбрано: <span id="selectedBreakfast">—</span></div>
                     </div>
-                </body>
-                </html>
-            `;
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <i class="bi bi-cloud-sun fs-5 me-2" style="color: var(--accent-cyan);"></i>
+                            <strong>Обед</strong> <span class="text-secondary small ms-2">13:00-14:00</span>
+                        </div>
+                        <div id="lunchOptions"></div>
+                        <div class="mt-2 small text-secondary">Выбрано: <span id="selectedLunch">—</span></div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <i class="bi bi-moon fs-5 me-2" style="color: var(--accent-purple);"></i>
+                            <strong>Ужин</strong> <span class="text-secondary small ms-2">18:00-20:00</span>
+                        </div>
+                        <div id="dinnerOptions"></div>
+                        <div class="mt-2 small text-secondary">Выбрано: <span id="selectedDinner">—</span></div>
+                    </div>
+                    
+                    <button id="saveMealsBtn" class="btn btn-sm-ghost w-100 mt-2"><i class="bi bi-save me-1"></i>Сохранить план</button>
+                </div>
+            </div>
             
-            window.print();
-            document.body.innerHTML = originalContent;
-            location.reload(); // Восстановление функциональности
-        });
+            <div class="col-lg-5">
+                <div class="card-bg">
+                    <h4 class="fw-bold mb-3">Ваш план питания</h4>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between small text-secondary mb-1"><span>Завтрак:</span><span id="summaryBreakfast">—</span></div>
+                        <div class="d-flex justify-content-between small text-secondary mb-1"><span>Обед:</span><span id="summaryLunch">—</span></div>
+                        <div class="d-flex justify-content-between small text-secondary mb-3"><span>Ужин:</span><span id="summaryDinner">—</span></div>
+                    </div>
+                    <hr class="border-secondary">
+                    <div class="row g-2 text-center">
+                        <div class="col-3"><div class="bg-dark rounded-3 p-2"><div class="fw-bold" id="caloriesTotal">0</div><div class="small text-secondary">ккал</div></div></div>
+                        <div class="col-3"><div class="bg-dark rounded-3 p-2"><div class="fw-bold" id="proteinTotal">0</div><div class="small text-secondary">белки</div></div></div>
+                        <div class="col-3"><div class="bg-dark rounded-3 p-2"><div class="fw-bold" id="carbsTotal">0</div><div class="small text-secondary">углеводы</div></div></div>
+                        <div class="col-3"><div class="bg-dark rounded-3 p-2"><div class="fw-bold" id="fatTotal">0</div><div class="small text-secondary">жиры</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="bi bi-code-square fs-3" style="color: var(--accent-cyan);"></i>
+                    <span class="fs-5 fw-bold">IT-ЗОЖ</span>
+                </div>
+                <p class="small text-secondary">Учебный проект по продвижению ЗОЖ и цифровой гигиены среди IT-специалистов.</p>
+            </div>
+            <div class="col-md-3">
+                <h6 class="text-white mb-3">Разделы</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="index.html" class="text-secondary" style="text-decoration: none;">Главная</a></li>
+                    <li class="mb-2"><a href="warm-up.html" class="text-secondary" style="text-decoration: none;">Разминка</a></li>
+                    <li class="mb-2"><a href="activity.html" class="text-secondary" style="text-decoration: none;">Активность</a></li>
+                    <li class="mb-2"><a href="schedule.html" class="text-secondary" style="text-decoration: none;">Режим и сон</a></li>
+                    <li class="mb-2"><a href="nutrition.html" class="text-secondary" style="text-decoration: none;">Питание</a></li>
+                    <li class="mb-2"><a href="prevention.html" class="text-secondary" style="text-decoration: none;">Профилактика</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-white mb-3">Разработка</h6>
+                <p class="small text-secondary">Разработка дизайна и кода — Колыванов Иван<br>© 2026</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const GLASS_ML = 250;
+    let glassesDrunk = parseInt(localStorage.getItem('waterGlasses')) || 0;
+    let waterNorm = parseFloat(localStorage.getItem('waterNorm')) || 2.1;
+    let waterGoal = Math.ceil((waterNorm * 1000) / GLASS_ML);
+    
+    function updateWaterUI() {
+        const ml = glassesDrunk * GLASS_ML;
+        const percent = Math.min(100, Math.round((ml / (waterNorm * 1000)) * 100));
+        document.getElementById('glassesCount').innerText = glassesDrunk;
+        document.getElementById('mlCount').innerText = ml;
+        document.getElementById('percentCount').innerText = percent + '%';
+        document.getElementById('waterProgress').style.width = percent + '%';
+        document.getElementById('goalGlasses').innerText = waterGoal;
+        document.getElementById('waterNormDisplay').innerText = waterNorm.toFixed(1);
         
-        // Кнопка "Начать с трекера воды"
-        document.getElementById('startWithWater').addEventListener('click', function() {
-            document.getElementById('water-tracker').scrollIntoView({ behavior: 'smooth' });
-            showNotification('Отличный выбор! Начните с отслеживания потребления воды.');
-        });
-        
-        // Функция показа уведомления
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
+        const container = document.getElementById('glassesContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < waterGoal; i++) {
+            const col = document.createElement('div');
+            col.className = 'col-auto';
+            col.innerHTML = `
+                <div class="water-glass ${i < glassesDrunk ? 'full' : ''}" data-index="${i}">
+                    <div class="glass-icon"><i class="bi bi-cup"></i></div>
+                    <div class="small">${i+1}</div>
+                </div>
             `;
-            
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #2ecc71;
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 5000);
+            col.querySelector('.water-glass').addEventListener('click', () => toggleGlass(i));
+            container.appendChild(col);
         }
-        
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', function() {
-            initWaterTracker();
-            initMealPlanner();
-            
-            // Обработчики событий для воды
-            addGlassButton.addEventListener('click', addGlass);
-            resetWaterButton.addEventListener('click', resetWaterTracker);
-            setWaterReminderButton.addEventListener('click', setWaterReminder);
-            calculateWaterButton.addEventListener('click', calculateWaterNorm);
-            
-            // Плавная прокрутка
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') !== '#') {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href');
-                        if (targetId === '#') return;
-                        
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                            
-                            document.querySelector('.nav-list').classList.remove('show');
-                        }
-                    }
-                });
+        localStorage.setItem('waterGlasses', glassesDrunk);
+        localStorage.setItem('waterNorm', waterNorm);
+    }
+    
+    function toggleGlass(index) {
+        if (index === glassesDrunk - 1) glassesDrunk--;
+        else if (index === glassesDrunk) glassesDrunk++;
+        else if (index < glassesDrunk) glassesDrunk = index + 1;
+        updateWaterUI();
+    }
+    
+    document.getElementById('addGlassBtn').addEventListener('click', () => {
+        if (glassesDrunk < waterGoal) {
+            glassesDrunk++;
+            updateWaterUI();
+        } else {
+            alert('Вы уже достигли дневной нормы воды! 🎉');
+        }
+    });
+    document.getElementById('resetWaterBtn').addEventListener('click', () => {
+        if (confirm('Сбросить трекер воды?')) {
+            glassesDrunk = 0;
+            updateWaterUI();
+        }
+    });
+    document.getElementById('calcNormBtn').addEventListener('click', () => {
+        const weight = parseFloat(document.getElementById('weightInput').value);
+        if (weight && weight >= 30 && weight <= 200) {
+            waterNorm = (weight * 30) / 1000;
+            waterGoal = Math.ceil((waterNorm * 1000) / GLASS_ML);
+            if (glassesDrunk > waterGoal) glassesDrunk = waterGoal;
+            updateWaterUI();
+        } else {
+            alert('Введите корректный вес (30-200 кг)');
+        }
+    });
+    
+    const mealsData = {
+        breakfast: {
+            1: { name: "Овсянка с фруктами", calories: 350, protein: 12, carbs: 60, fat: 8 },
+            2: { name: "Омлет с овощами", calories: 320, protein: 22, carbs: 15, fat: 20 },
+            3: { name: "Творог с зеленью", calories: 280, protein: 25, carbs: 20, fat: 12 }
+        },
+        lunch: {
+            1: { name: "Гречка с курицей", calories: 450, protein: 35, carbs: 55, fat: 12 },
+            2: { name: "Овощной суп + рыба", calories: 480, protein: 30, carbs: 40, fat: 18 },
+            3: { name: "Салат с тунцом", calories: 380, protein: 28, carbs: 20, fat: 22 }
+        },
+        dinner: {
+            1: { name: "Запеченная курица", calories: 320, protein: 35, carbs: 15, fat: 14 },
+            2: { name: "Творожная запеканка", calories: 280, protein: 22, carbs: 25, fat: 10 },
+            3: { name: "Овощное рагу", calories: 250, protein: 12, carbs: 35, fat: 8 }
+        }
+    };
+    
+    let selectedMeals = JSON.parse(localStorage.getItem('selectedMeals')) || {
+        breakfast: null, lunch: null, dinner: null
+    };
+    
+    function renderMealOptions(mealType, containerId, selectedIdSpan) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        for (const [key, val] of Object.entries(mealsData[mealType])) {
+            const div = document.createElement('div');
+            div.className = `meal-option ${selectedMeals[mealType] == key ? 'selected' : ''}`;
+            div.innerHTML = `<div class="fw-bold">${val.name}</div><div class="small text-secondary">${val.calories} ккал · б ${val.protein} · ж ${val.fat} · у ${val.carbs}</div>`;
+            div.addEventListener('click', () => {
+                selectedMeals[mealType] = key;
+                renderAllMeals();
+                updateSummary();
+                localStorage.setItem('selectedMeals', JSON.stringify(selectedMeals));
             });
-        });
-    </script>
+            container.appendChild(div);
+        }
+        document.getElementById(selectedIdSpan).innerText = selectedMeals[mealType] ? mealsData[mealType][selectedMeals[mealType]].name : '—';
+    }
+    
+    function renderAllMeals() {
+        renderMealOptions('breakfast', 'breakfastOptions', 'selectedBreakfast');
+        renderMealOptions('lunch', 'lunchOptions', 'selectedLunch');
+        renderMealOptions('dinner', 'dinnerOptions', 'selectedDinner');
+    }
+    
+    function updateSummary() {
+        let totalCal = 0, totalProt = 0, totalCarb = 0, totalFat = 0;
+        const summary = { breakfast: '—', lunch: '—', dinner: '—' };
+        for (const [meal, key] of Object.entries(selectedMeals)) {
+            if (key && mealsData[meal][key]) {
+                const d = mealsData[meal][key];
+                summary[meal] = d.name;
+                totalCal += d.calories;
+                totalProt += d.protein;
+                totalCarb += d.carbs;
+                totalFat += d.fat;
+            }
+        }
+        document.getElementById('summaryBreakfast').innerText = summary.breakfast;
+        document.getElementById('summaryLunch').innerText = summary.lunch;
+        document.getElementById('summaryDinner').innerText = summary.dinner;
+        document.getElementById('caloriesTotal').innerText = totalCal;
+        document.getElementById('proteinTotal').innerText = totalProt + 'г';
+        document.getElementById('carbsTotal').innerText = totalCarb + 'г';
+        document.getElementById('fatTotal').innerText = totalFat + 'г';
+    }
+    
+    document.getElementById('saveMealsBtn').addEventListener('click', () => {
+        localStorage.setItem('selectedMeals', JSON.stringify(selectedMeals));
+        alert('План питания сохранён!');
+    });
+    
+    updateWaterUI();
+    renderAllMeals();
+    updateSummary();
+</script>
 </body>
 </html>

@@ -3,222 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT-ЗОЖ | Главная</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <title>IT-ЗОЖ | Баланс кода и тела</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0c12;
+            --bg-card: #11131c;
+            --border: #1f2230;
+            --text-primary: #eef2ff;
+            --text-secondary: #8b92b0;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', 'SF Mono', 'Fira Code', monospace;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            background: rgba(10, 12, 18, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            font-family: monospace;
+        }
+        .navbar-brand span:first-child {
+            color: var(--accent-cyan);
+        }
+        .navbar-brand span:last-child {
+            color: var(--text-primary);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0 4px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+        .nav-link.active {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border-radius: 8px;
+        }
+
+        .hero {
+            padding: 100px 0 60px;
+            border-bottom: 1px solid var(--border);
+            background: radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.08), transparent 50%);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(6,182,212,0.15);
+            border: 1px solid rgba(6,182,212,0.3);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            font-family: monospace;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-cyan) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 90%;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 24px;
+            margin: 28px 0;
+        }
+
+        .btn-primary-ghost {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-primary-ghost:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 12px rgba(6,182,212,0.4);
+        }
+        .btn-outline-light {
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: 12px 28px;
+        }
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .risk-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 24px;
+            transition: 0.25s ease;
+            height: 100%;
+        }
+        .risk-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            background: #121520;
+        }
+        .risk-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(6,182,212,0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--accent-cyan);
+        }
+        .risk-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .risk-stats {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            margin-top: 16px;
+            border-top: 1px dashed var(--border);
+            padding-top: 16px;
+        }
+
+        .feature-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            transition: 0.2s;
+            height: 100%;
+        }
+        .feature-code {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #0c0e15;
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+        .feature-code span {
+            color: var(--accent-purple);
+        }
+        .feature-block h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .stats-cta {
+            background: linear-gradient(135deg, #0f1220 0%, #0a0c12 100%);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 48px 40px;
+            margin: 40px 0;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: monospace;
+            color: var(--accent-cyan);
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            background: #080a10;
+            padding: 48px 0 24px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero-text {
+                max-width: 100%;
+            }
+            .stats-cta {
+                padding: 32px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <i class="fas fa-code"></i>
-                    <span class="logo-text">IT-ЗОЖ</span>
-                </a>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span>&lt;/&gt;</span> <span>IT-ЗОЖ</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="bi bi-list" style="color: white;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto gap-2">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="warm-up.html">Разминка</a></li>
+                <li class="nav-item"><a class="nav-link" href="activity.html">Активность</a></li>
+                <li class="nav-item"><a class="nav-link" href="schedule.html">Режим и сон</a></li>
+                <li class="nav-item"><a class="nav-link" href="nutrition.html">Питание</a></li>
+                <li class="nav-item"><a class="nav-link" href="prevention.html">Профилактика</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="hero-badge">
+                    <i class="bi bi-cpu me-1"></i> for developers · v2.0
+                </div>
+                <h1>Код работает,<br>а ты отдыхаешь?</h1>
+                <div class="hero-text">
+                    Инженер здоровых привычек — веб-приложение, которое напомнит размяться, 
+                    выпить воды и не сгореть до дедлайна.
+                </div>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="warm-up.html" class="btn btn-primary-ghost">
+                        <i class="bi bi-play-circle me-2"></i>Начать разминку
+                    </a>
+                    <a href="#risks" class="btn btn-outline-light">
+                        <i class="bi bi-chevron-down"></i> Риски профессии
+                    </a>
+                </div>
             </div>
-            
-            <!-- Навигационное меню -->
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Главная</a></li>
-                    <li class="nav-item"><a href="warm-up.html" class="nav-link"><i class="fas fa-running"></i> Разминка</a></li>
-                    <li class="nav-item"><a href="activity.html" class="nav-link"><i class="fas fa-bicycle"></i> Активность</a></li>
-                    <li class="nav-item"><a href="schedule.html" class="nav-link"><i class="fas fa-bed"></i> Режим и сон</a></li>
-                    <li class="nav-item"><a href="nutrition.html" class="nav-link"><i class="fas fa-apple-alt"></i> Питание</a></li>
-                    <li class="nav-item"><a href="prevention.html" class="nav-link"><i class="fas fa-shield-alt"></i> Профилактика</a></li>
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="bg-dark p-3 rounded-4 border" style="background: #0c0f18; border-color: #1e2436;">
+                    <div class="d-flex gap-2 mb-3">
+                        <i class="bi bi-circle-fill" style="color: #ff5f56;"></i>
+                        <i class="bi bi-circle-fill" style="color: #ffbd2e;"></i>
+                        <i class="bi bi-circle-fill" style="color: #27c93f;"></i>
+                        <span class="ms-2 text-muted small">terminal@health:~</span>
+                    </div>
+                    <pre style="font-family: monospace; font-size: 0.75rem; color: #8b92b0; margin: 0;">
+<span style="color: #06b6d4;">$</span> health-check --status
+→ posture:     slumped 87%
+→ eyes:        fatigued
+→ water:       low (1.2L / 2.5L)
+<span style="color:#10b981;">[suggestion]</span> Take a 5min break & stretch neck
+<span style="color:#06b6d4;">$</span> _</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="risks">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="fw-bold" style="font-size: 2rem;">Почему программисту <span style="color: var(--accent-cyan);">не всё равно?</span></h2>
+                <p class="text-secondary" style="max-width: 700px;">Сидячая работа + дедлайны = хронические риски. Вот главные из них.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="risk-card">
+                    <div class="risk-icon"><i class="bi bi-eye"></i></div>
+                    <h3>Зрение</h3>
+                    <p class="text-secondary">Синдром сухого глаза, спазм аккомодации — плата за 10 часов перед монитором.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="risk-card">
+                    <div class="risk-icon"><i class="bi bi-back"></i></div>
+                    <h3>Спина и шея</h3>
+                    <p class="text-secondary">Остеохондроз, кифоз, защемления — если вовремя не встать из-за стола.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="risk-card">
+                    <div class="risk-icon"><i class="bi bi-hand-index"></i></div>
+                    <h3>Кисти рук</h3>
+                    <p class="text-secondary">Туннельный синдром — боль в запястьях от мыши и клавиатуры.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="risk-card">
+                    <div class="risk-icon"><i class="bi bi-tsunami"></i></div>
+                    <h3>Выгорание</h3>
+                    <p class="text-secondary">Хронический стресс, бессонница, апатия — результат без перерывов.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background: #0c0e16;">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="fw-bold">Инструменты <span style="color: var(--accent-purple);">в одном флаконе</span></h2>
+                <p class="text-secondary">Никакой магии — только системный подход к здоровью.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="feature-block">
+                    <div class="feature-code">
+                        <span>$</span> warmup --start neck<br>
+                        <span>→</span> 6 упражнений с таймером<br>
+                        <span>✓</span> фильтр по зонам: шея/спина/кисти
+                    </div>
+                    <h4>Разминка за ПК</h4>
+                    <p class="text-secondary">Короткие комплексы без отрыва от рабочего места. Гимнастика для глаз, спины, кистей.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-block">
+                    <div class="feature-code">
+                        <span>$</span> water-tracker --goal 2.2L<br>
+                        <span>🍶</span> +1 стакан (250ml)<br>
+                        <span>→</span> прогресс: ▰▰▰▰▰▰▰▰▰▰ 84%
+                    </div>
+                    <h4>Трекер воды + питание</h4>
+                    <p class="text-secondary">Норма воды под ваш вес, планировщик рациона, полезные перекусы.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-block">
+                    <div class="feature-code">
+                        <span>$</span> pomodoro 25/5<br>
+                        [ WORK ] ▰▰▰▰▰▰▰▰▰▰ 00:00<br>
+                        → циклов сегодня: 3
+                    </div>
+                    <h4>Режим и сон</h4>
+                    <p class="text-secondary">Таймер Pomodoro, планировщик дня, трекер сна и напоминания.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-block">
+                    <div class="feature-code">
+                        <span>$</span> checklist --daily<br>
+                        ✅ гимнастика для глаз<br>
+                        ❌ вода 2л<br>
+                        ✅ разминка спины
+                    </div>
+                    <h4>Чек-лист привычек</h4>
+                    <p class="text-secondary">Ежедневный контроль + календарь прогресса и мотивация.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="stats-cta">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="fw-bold mb-3">Хватит себя игнорировать</h3>
+                    <p class="text-secondary">Всего 5 минут перерыва каждые 90 минут повышают продуктивность на 30% и снижают риск болей в спине на 45%.</p>
+                    <a href="prevention.html" class="btn btn-primary-ghost mt-2">Профилактика →</a>
+                </div>
+                <div class="col-md-6">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="stat-number">-41%</div>
+                            <div class="text-secondary small">усталости глаз</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-number">+28%</div>
+                            <div class="text-secondary small">концентрации</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-number">7.2ч</div>
+                            <div class="text-secondary small">качественный сон</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="bi bi-code-square fs-3" style="color: var(--accent-cyan);"></i>
+                    <span class="fs-5 fw-bold">IT-ЗОЖ</span>
+                </div>
+                <p class="small text-secondary">Учебный проект по продвижению ЗОЖ и цифровой гигиены среди IT-специалистов.</p>
+            </div>
+            <div class="col-md-3">
+                <h6 class="text-white mb-3">Разделы</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="index.html" class="text-secondary" style="text-decoration: none;">Главная</a></li>
+                    <li class="mb-2"><a href="warm-up.html" class="text-secondary" style="text-decoration: none;">Разминка</a></li>
+                    <li class="mb-2"><a href="nutrition.html" class="text-secondary" style="text-decoration: none;">Питание</a></li>
+                    <li class="mb-2"><a href="prevention.html" class="text-secondary" style="text-decoration: none;">Профилактика</a></li>
                 </ul>
-                
-                <!-- Кнопка меню для мобильных устройств -->
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-
-        </div>
-    </header>
-
-    <!-- Основной контент -->
-    <main>
-        <!-- Герой-секция -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Здоровый программист — эффективный программист</h1>
-                    <p class="hero-subtitle">Практические советы по сохранению здоровья для тех, кто проводит много времени за компьютером. Узнайте, как сохранить зрение, осанку и энергию в условиях сидячей работы.</p>
-                    <div class="hero-buttons">
-                        <a href="#problems" class="btn btn-outline">Узнать о рисках</a>
-                        <a href="warm-up.html" class="btn btn-primary">Начать разминку</a>
-                    </div>
-                </div>
             </div>
-        </section>
-
-        <!-- Секция "Почему это важно" -->
-        <section class="section" id="problems">
-            <div class="container">
-                <h2 class="section-title">Почему программисту нужно заботиться о здоровье?</h2>
-                <p class="section-subtitle">Сидячая работа создает специфические риски для организма. Знание этих рисков — первый шаг к их предотвращению.</p>
-                
-                <div class="cards-grid">
-                    <!-- Карточка 1 -->
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3 class="card-title">Зрение</h3>
-                        <p class="card-text">Длительная фокусировка на мониторе приводит к синдрому сухого глаза, ухудшению зрения и головным болям. Без перерывов и гимнастики для глаз риск проблем возрастает в разы.</p>
-                    </div>
-                    
-                    <!-- Карточка 2 -->
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-backbone"></i>
-                        </div>
-                        <h3 class="card-title">Спина и шея</h3>
-                        <p class="card-text">Неестественное положение тела, скругленная спина и вытянутая вперед шея — прямой путь к остеохондрозу, грыжам и хроническим болям в спине и шее.</p>
-                    </div>
-                    
-                    <!-- Карточка 3 -->
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-hand-paper"></i>
-                        </div>
-                        <h3 class="card-title">Кисти рук</h3>
-                        <p class="card-text">Постоянная работа с клавиатурой и мышью может привести к туннельному синдрому запястья — болезненному состоянию, которое иногда требует даже хирургического вмешательства.</p>
-                    </div>
-                    
-                    <!-- Карточка 4 -->
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3 class="card-title">Психика и стресс</h3>
-                        <p class="card-text">Дедлайны, сложные задачи и многочасовое напряжение приводят к хроническому стрессу, выгоранию и проблемам со сном. Без отдыха продуктивность падает.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция "Что вы найдете на сайте" -->
-        <section class="section section-gray">
-            <div class="container">
-                <h2 class="section-title">Что вы найдете на IT-ЗОЖ?</h2>
-                <p class="section-subtitle">Практические и простые в применении рекомендации, которые можно внедрить уже сегодня.</p>
-                
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature-number">01</div>
-                        <h3 class="feature-title">Упражнения прямо за компьютером</h3>
-                        <p class="feature-text">Короткие комплексы для разминки, которые можно выполнять, не отходя от рабочего места. Для спины, шеи, кистей и глаз.</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-number">02</div>
-                        <h3 class="feature-title">Советы по организации дня</h3>
-                        <p class="feature-text">Как планировать работу и отдых, чтобы сохранять продуктивность без ущерба для здоровья. Метод Помодоро, важность сна и перерывов.</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-number">03</div>
-                        <h3 class="feature-title">Рекомендации по питанию и активности</h3>
-                        <p class="feature-text">Чем заменить вредные перекусы, сколько пить воды, как компенсировать сидячий образ жизни легкой физической активностью.</p>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-number">04</div>
-                        <h3 class="feature-title">Профилактика профессиональных заболеваний</h3>
-                        <p class="feature-text">Как настроить рабочее место, избежать туннельного синдрома, сохранить осанку и зрение в условиях постоянной работы за компьютером.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция с призывом к действию -->
-        <section class="section cta-section">
-            <div class="container">
-                <h2 class="cta-title">Начните заботиться о своем здоровье сегодня!</h2>
-                <p class="cta-text">Потратьте 5 минут на разминку — сэкономьте годы активной жизни и карьеры.</p>
-                <div class="cta-buttons">
-                    <a href="warm-up.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-play-circle"></i> Начать с упражнений
-                    </a>
-                    <a href="prevention.html" class="btn btn-outline btn-large">
-                        Узнать о профилактике
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Подвал сайта -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-code"></i>
-                    <span class="logo-text">IT-ЗОЖ</span>
-                </div>
-                <p class="footer-description">Учебный проект о здоровом образе жизни для программистов. Советы и рекомендации, которые помогут сохранить здоровье в условиях сидячей работы.</p>
-                
-                <div class="footer-links">
-                    <h4 class="footer-title">Быстрые ссылки</h4>
-                    <ul class="footer-list">
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="warm-up.html">Разминка</a></li>
-                        <li><a href="activity.html">Активность</a></li>
-                        <li><a href="schedule.html">Режим и сон</a></li>
-                        <li><a href="nutrition.html">Питание</a></li>
-                        <li><a href="prevention.html">Профилактика</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-info">
-                    <h4 class="footer-title">Информация</h4>
-                    <p>© <span id="currentYear"></span> IT-ЗОЖ. Учебный проект.</p>
-                    <p>Для начинающих веб-разработчиков.</p>
-                    
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>Сайт создан в образовательных целях. Консультация специалиста рекомендуется при серьезных проблемах со здоровьем.</p>
+            <div class="col-md-4">
+                <h6 class="text-white mb-3">Разработка</h6>
+                <p class="small text-secondary">Разработка дизайна и кода — Колыванов Иван<br>© 2026</p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Скрипты -->
-    <script>
-        // Текущий год в футере
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Мобильное меню
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.querySelector('.nav-list').classList.toggle('show');
-        });
-        
-        // Плавная прокрутка к якорям
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Закрыть мобильное меню после клика
-                        document.querySelector('.nav-list').classList.remove('show');
-                    }
-                }
-            });
-        });
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
